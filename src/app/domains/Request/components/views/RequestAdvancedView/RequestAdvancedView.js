@@ -29,7 +29,6 @@ const RequestAdvancedView = (props) => {
   const start = moment(data?.start?.toDate()).format(dateFormat)
   const end = moment(data?.end?.toDate()).format(dateFormat)
 
-  console.log(data.status)
   //[HELPER_FUNCTIONS]
   const onApprove = async () => {
     setLoading(true)
@@ -74,7 +73,8 @@ const RequestAdvancedView = (props) => {
             <Col>
               <Row noGutters>
                 <Col>
-                  <Title level={3}>{data.title}</Title>
+                  <Title
+                    level={3}>{`${data.leaveDayType}, ${data.title}`}</Title>
                   <Box justifyContent="space-between">
                     <Row noGutters mb={1}>
                       <Col cw="auto" mr={2}>

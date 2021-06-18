@@ -49,18 +49,51 @@ const CalendarAddEvent = () => {
     setLoading(true)
     const color = titleSwitch(data.title)
     try {
-      await addData(COLLECTIONS.LEAVE_DAYS, {
-        title: name ? name : user.email,
-        leaveDayType: data?.title,
-        start: new Date(data?.dateStart),
-        end: new Date(data?.dateEnd),
-        backgroundColor: color,
-        borderColor: color,
-        userId: user.uid,
-        status:
-          data?.title === LEAVE_DAY.SICK_DAY ? STATUS.APPROVED : STATUS.PENDING,
-        description: data.description || ''
-      })
+      if (data.title === LEAVE_DAY.SWAP_DAY) {
+        await addData(COLLECTIONS.LEAVE_DAYS, {
+          title: name ? name : user.email,
+          leaveDayType: data?.title,
+          start: new Date(data?.dateStart),
+          end: new Date(data?.dateStart),
+          backgroundColor: color,
+          borderColor: color,
+          userId: user.uid,
+          status:
+            data?.title === LEAVE_DAY.SICK_DAY
+              ? STATUS.APPROVED
+              : STATUS.PENDING,
+          description: data.description || ''
+        })
+        await addData(COLLECTIONS.LEAVE_DAYS, {
+          title: name ? name : user.email,
+          leaveDayType: data?.title,
+          start: new Date(data?.dateEnd),
+          end: new Date(data?.dateEnd),
+          backgroundColor: color,
+          borderColor: color,
+          userId: user.uid,
+          status:
+            data?.title === LEAVE_DAY.SICK_DAY
+              ? STATUS.APPROVED
+              : STATUS.PENDING,
+          description: data.description || ''
+        })
+      } else {
+        await addData(COLLECTIONS.LEAVE_DAYS, {
+          title: name ? name : user.email,
+          leaveDayType: data?.title,
+          start: new Date(data?.dateStart),
+          end: new Date(data?.dateEnd),
+          backgroundColor: color,
+          borderColor: color,
+          userId: user.uid,
+          status:
+            data?.title === LEAVE_DAY.SICK_DAY
+              ? STATUS.APPROVED
+              : STATUS.PENDING,
+          description: data.description || ''
+        })
+      }
     } catch (e) {
       message.error("Can't create Event")
     }

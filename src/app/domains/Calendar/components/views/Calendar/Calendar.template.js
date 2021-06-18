@@ -117,6 +117,7 @@ const RenderEventContent = (eventInfo) => {
     }
     setVisible(!visible)
   }
+  console.log(eventInfo.event)
   return (
     <Box display="flex" justifyContent="space-between" alignItems="center">
       <Tooltip
@@ -132,7 +133,7 @@ const RenderEventContent = (eventInfo) => {
         </Text>
       </Tooltip>
       <Popconfirm
-        title="Delete user?"
+        title="Delete leave day?"
         cancelText="No"
         okText="Yes"
         visible={visible}
